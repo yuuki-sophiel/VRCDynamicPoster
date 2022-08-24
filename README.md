@@ -1,6 +1,6 @@
 # VRCDynamicPoster
 
-[![Deploy](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml/badge.svg)](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml)
 
 Unity を立ち上げずに内容編集できることを目指したワールド紹介ポスターです。
 
