@@ -159,7 +159,7 @@ public static class TextImageGenerator
                         throw new InvalidDataException($"NONE, TRUE, FALSE以外のpixel値を検出. {nameof(pixelX)}={pixelX}, {nameof(pixelY)}={pixelY}, pixel={pixel}");
                     }
                 }
-                // 出来たデータをリトルエンディアンで組み立てる
+                // 出来たデータをとっておく
                 dstDatas.Add(dstData);
             }
             // 1行のデータがParseし終わったので文字列にする. 全部NONE_COLORの場合は無視
