@@ -19,4 +19,4 @@ services:
     volumes:
       - ./dst:/App
     working_dir: /App
-    command: -r 1 -i %d.png -vcodec libx264 -crf 1 -pix_fmt yuv420p -r 1 -y poster.mp4
+    command: -r 0.5 -i %d.png -vcodec libx264 -crf 1 -pix_fmt yuv420p -r 2 -y poster.mp4
