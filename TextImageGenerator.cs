@@ -29,10 +29,6 @@ public static class TextImageGenerator
     /// </summary>
     public static readonly int HEIGHT_PER_BIT = 4;
     /// <summary>
-    /// 最低画像高さを横幅のどの程度にするか
-    /// </summary>
-    public static readonly float MIN_IMAGE_HEIGHT_RATIO = 0.1f;
-    /// <summary>
     /// 背景色。値なし
     /// </summary>
     public static readonly Color NONE_COLOR = Color.Lime;
@@ -67,10 +63,11 @@ public static class TextImageGenerator
     /// </summary>
     /// <param name="dstFilePath">保存先</param>
     /// <param name="entries">対象</param>
-    public static void Encode(string dstFilePath, IEnumerable<WorldEntry> entries)
+    /// <param name="entryLimit">上限個数</param>
+    public static void Encode(string dstFilePath, IEnumerable<WorldEntry> entries, int entryLimit)
     {
         // 画像サイズ決定
-        var dataEntries = entries.Select(x => EncodeASCII(x.Id)).ToArray();
+        var dataEntries = entries.Take(entryLimit).Select(x => EncodeASCII(x.Id)).ToArray();
         var dataWidth = dataEntries.Max(x => x.Length);
         var dataHeight = dataEntries.Length;
         if (dataWidth == 0 || dataHeight == 0)
@@ -78,7 +75,7 @@ public static class TextImageGenerator
 
         // 画像生成
         var imageWidth = dataWidth * WIDTH_PER_BIT * BIT_PER_DATA;
-        var imageHeight = Math.Max(dataHeight * HEIGHT_PER_BIT, (int)Math.Ceiling(imageWidth * MIN_IMAGE_HEIGHT_RATIO)); // 生成画像のアス比が極端にならないように
+        var imageHeight = entryLimit * HEIGHT_PER_BIT;
         using Image<Rgba32> image = new(imageWidth, imageHeight);
         image.Mutate(x =>
         {

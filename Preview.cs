@@ -80,7 +80,7 @@ namespace VRCDynamicPoster
             this.Write("\"\n            src=\"");
             
             #line 1 "D:\repos\VRCDynamicPoster\Preview.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(e.ImageFileName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(e.ImageDstName));
             
             #line default
             #line hidden
