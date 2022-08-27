@@ -20,8 +20,10 @@ jobs:
         run: dotnet restore
       - name: Run
         run: dotnet run
-      - name: Generate Video
-        run: docker-compose run convert_to_video
+      - name: Generate index.mp4
+        run: docker-compose run generate_index_video
+      - name: Generate poster.mp4
+        run: docker-compose run generate_poster_video
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }} # PRではDeployしない

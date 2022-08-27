@@ -1,15 +1,22 @@
 version: "3"
 services:
-  encode_image:
+  generate_image:
    build: .
    volumes:
      - ./:/App
    working_dir: /App
    command: dotnet run
 
-  convert_to_video:
+  generate_index_video:
     image: linuxserver/ffmpeg:version-4.4-cli
     volumes:
       - ./dst:/App
     working_dir: /App
     command: -loop 1 -i index.bmp -vcodec libx264 -crf 1 -pix_fmt yuv420p -t 2 -r 1 -y index.mp4
+
+  generate_poster_video:
+    image: linuxserver/ffmpeg:version-4.4-cli
+    volumes:
+      - ./dst:/App
+    working_dir: /App
+    command: -r 1 -i %d.png -vcodec libx264 -crf 1 -pix_fmt yuv420p -r 1 -y poster.mp4
