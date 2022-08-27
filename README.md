@@ -14,7 +14,7 @@ Unity を立ち上げずに内容編集できることを目指したワール�
 
 ## 追加方法
 
-`asset/world` ディレクトリに World の Id をファイル名にしたポスター画像を入れて Commit すると自動で更新されます。
+`asset/world` ディレクトリに World の Id をファイル名にした png 画像を入れて Commit すると自動で更新されます。
 
 自分で編集しても良いですし、ワールド利用者から Pull Request を貰う形で運用しても良さそうです。
 
@@ -31,8 +31,9 @@ World Id はブラウザからワールドの Public Link を開くと、url 上
 
 ```shell
 # Docker composeを利用する場合
-$ docker-compose run encode_image
-$ docker-compose run convert_to_video
+$ docker-compose run generate_image
+$ docker-compose run generate_index_video
+$ docker-compose run generate_poster_video
 ```
 
 ## 参照技術

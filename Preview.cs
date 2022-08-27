@@ -46,7 +46,7 @@ namespace VRCDynamicPoster
     </a>
 
     <h2>Encode Video</h2>
-    <video src=""index.mp4"" controls preload=""none""></video>
+    <video src=""index.mp4"" controls></video>
 
     <h2>Encode Image</h2>
       <figure>
@@ -56,6 +56,9 @@ namespace VRCDynamicPoster
         />
         <figcaption>index.bmp</figcaption>
       </figure>
+      
+    <h2>Poster Video</h2>
+    <video src=""poster.mp4"" controls></video>
 
     <h2>Entries</h2>
     ");
