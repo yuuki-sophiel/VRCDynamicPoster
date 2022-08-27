@@ -41,7 +41,9 @@ namespace VRCDynamicPoster
     <link rel=""stylesheet"" href=""https://cdn.simplecss.org/simple.min.css"" />
   </head>
   <body>
-    <h1>VRC Dynamic Poster Preview</h1>
+    <a href=""https://github.com/shino-hinaduki/VRCDynamicPoster"">
+        <h1>VRC Dynamic Poster Preview</h1>
+    </a>
 
     <h2>Encode Video</h2>
     <video src=""index.mp4"" controls preload=""none""></video>
