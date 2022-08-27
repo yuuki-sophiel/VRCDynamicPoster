@@ -33,7 +33,7 @@
         <figure>
           <img
             alt="<#= e.Id #>"
-            src="<#= e.ImageFileName #>"
+            src="<#= e.ImageDstName #>"
           />
           <figcaption><#= e.Id #></figcaption>
         </figure>
