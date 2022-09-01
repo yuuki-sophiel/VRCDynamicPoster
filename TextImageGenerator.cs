@@ -64,7 +64,7 @@ public static class TextImageGenerator
     /// <param name="dstFilePath">保存先</param>
     /// <param name="entries">対象</param>
     /// <param name="entryLimit">上限個数</param>
-    public static void Encode(string dstFilePath, IEnumerable<WorldEntry> entries, int entryLimit)
+    public static void Encode(string dstFilePath, IEnumerable<Entry> entries, int entryLimit)
     {
         // 画像サイズ決定
         var dataEntries = entries.Take(entryLimit).Select(x => EncodeASCII(x.Id)).ToArray();
