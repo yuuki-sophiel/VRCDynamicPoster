@@ -4,11 +4,21 @@ using System.IO;
 
 namespace VRCDynamicPoster;
 
+
+public enum Category
+{
+    None, World, Avatar
+}
+
 /// <summary>
 /// 画像ごとのエントリを示す
 /// </summary>
-public class WorldEntry
+public class Entry
 {
+    /// <summary>
+    /// 種類
+    /// </summary>
+    public Category Category { get; set; } = Category.None;
     /// <summary>
     /// 通し番号
     /// </summary>
@@ -38,27 +48,41 @@ public class WorldEntry
     /// </summary>
     public string ImageDstPath => Path.Combine(ImageDstDir, ImageDstName);
     /// <summary>
-    /// 画像ファイル名から抽出したWorldId
+    /// 画像ファイル名から抽出したId
     /// </summary>
     public string Id => Path.GetFileNameWithoutExtension(ImageSrcPath);
     /// <summary>
     /// ブラウザで開く用のURL
     /// </summary>
-    public string Url => BaseUrl.Replace("{worldId}", Id);
+    public string Url => BaseUrl.Replace("{id}", Id);
 
     /// <summary>
-    /// Worldの画像とBlueprint IDの対応を示すEntry
+    /// 画像とBlueprint IDの対応を示すEntry
     /// </summary>
     /// <param name="index">通し番号</param>
     /// <param name="srcImagePath">画像保存元</param>
     /// <param name="dstPath">Copy先</param>
-    /// <param name="baseUrl">VRCのWorld baseUrl。 "{worldId}" 部分が置換される</param>
-    public WorldEntry(int index, string srcImagePath, string dstDir, string baseUrl)
+    /// <param name="worldBaseUrl">VRCのWorld baseUrl。 "{id}" 部分が置換される</param>
+    /// <param name="avatarBaseUrl">VRCのAvatar baseUrl。 "{id}" 部分が置換される</param>
+    public Entry(int index, string srcImagePath, string dstDir, string worldBaseUrl, string avatarBaseUrl)
     {
         Index = index;
         ImageSrcPath = srcImagePath;
         ImageDstDir = dstDir;
-        BaseUrl = baseUrl;
+        if (ImageSrcName.IndexOf("wrld_") != -1)
+        {
+            Category = Category.World;
+            BaseUrl = worldBaseUrl;
+        }
+        else if (ImageSrcName.IndexOf("avtr_") != -1)
+        {
+            Category = Category.Avatar;
+            BaseUrl = avatarBaseUrl;
+        }
+        else
+        {
+            throw new ArgumentException($"invalid filename. {nameof(srcImagePath)}={srcImagePath}");
+        }
     }
 
     /// <summary>

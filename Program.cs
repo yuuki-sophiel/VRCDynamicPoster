@@ -6,10 +6,10 @@ using System.CodeDom;
 namespace VRCDynamicPoster;
 public class Program
 {
-    public static readonly string ASSET_WORLD_PATH = "asset/world";
-    public static readonly string ASSET_SEARCH_PATTERN = "wrld_*";
-    public static readonly string VRC_WORLD_BASE_URL = "https://vrchat.com/home/launch?worldId={worldId}";
-    public static readonly int LIMIT_ENTRY_NUM = 32;
+    public static readonly string ASSET_PATH = "asset";
+    public static readonly string VRC_WORLD_BASE_URL = "https://vrchat.com/home/world/{id}";
+    public static readonly string VRC_AVATAR_BASE_URL = "https://vrchat.com/home/avatar/{id}";
+    public static readonly int LIMIT_ENTRY_NUM = 128;
 
     public static readonly string DST_DIR = "dst";
     public static readonly string PREVIEW_HTML_NAME = "index.html";
@@ -17,9 +17,9 @@ public class Program
     private static void Main(string[] args)
     {
         // デフォルト or コマンドラインから設定
-        var srcDir = args.Length > 2 ? args[1] : ASSET_WORLD_PATH;
-        var pattern = args.Length > 3 ? args[2] : ASSET_SEARCH_PATTERN;
-        var baseUrl = args.Length > 4 ? args[3] : VRC_WORLD_BASE_URL;
+        var assetDir = args.Length > 2 ? args[1] : ASSET_PATH;
+        var worldBaseUrl = args.Length > 3 ? args[2] : VRC_WORLD_BASE_URL;
+        var avatarBaseUrl = args.Length > 4 ? args[3] : VRC_AVATAR_BASE_URL;
         var limitNum = args.Length > 5 ? int.Parse(args[4]) : LIMIT_ENTRY_NUM;
         // 現状帰る必要なさそう
         var dstDir = DST_DIR;
@@ -27,9 +27,9 @@ public class Program
         var previewImageName = PREVIEW_IMAGE_NAME;
 
         Console.WriteLine("== VRCDynamicPoster ==");
-        Console.WriteLine($"{nameof(srcDir)}={srcDir}");
-        Console.WriteLine($"{nameof(pattern)}={pattern}");
-        Console.WriteLine($"{nameof(baseUrl)}={baseUrl}");
+        Console.WriteLine($"{nameof(assetDir)}={assetDir}");
+        Console.WriteLine($"{nameof(worldBaseUrl)}={worldBaseUrl}");
+        Console.WriteLine($"{nameof(avatarBaseUrl)}={avatarBaseUrl}");
         Console.WriteLine($"{nameof(limitNum)}={limitNum}");
         Console.WriteLine($"{nameof(dstDir)}={dstDir}");
         Console.WriteLine($"{nameof(previewHtmlName)}={previewHtmlName}");
@@ -44,8 +44,8 @@ public class Program
 
         // ファイル一覧を取得
         var entries =
-            Directory.GetFiles(srcDir, pattern)
-                     .Select((srcDir, i) => new WorldEntry(i, srcDir, dstDir, baseUrl))
+            Directory.GetFiles(assetDir)
+                     .Select((srcDir, i) => new Entry(i, srcDir, dstDir, worldBaseUrl, avatarBaseUrl))
                      .ToArray();
         Console.WriteLine("encode_files={");
         foreach (var e in entries)
@@ -53,6 +53,11 @@ public class Program
             Console.WriteLine($"\t{e},");
         }
         Console.WriteLine("}");
+        if (entries.Length == 0)
+        {
+            Console.WriteLine($"entry not found. assetDir={assetDir}");
+            return;
+        }
 
         // Limit確認。削る
         if (entries.Length >= limitNum)

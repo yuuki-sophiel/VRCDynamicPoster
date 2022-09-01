@@ -2,7 +2,7 @@
 
 [![Deploy](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/shino-hinaduki/VRCDynamicPoster/actions/workflows/deploy.yml)
 
-Unity を立ち上げずに内容編集できることを目指したワールド紹介ポスターです。
+Unity を立ち上げずに内容編集できることを目指したワールド/パブリックアバター紹介ポスターです。
 
 本リポジトリは、内容物の編集・生成を担当します。
 
@@ -14,7 +14,7 @@ Unity を立ち上げずに内容編集できることを目指したワール�
 
 ## 追加方法
 
-`asset/world` ディレクトリに World の Id をファイル名にした png 画像を入れて Commit すると自動で更新されます。
+`asset` ディレクトリに World/Avatar の Id をファイル名にした png 画像を入れて Commit すると自動で更新されます。
 
 自分で編集しても良いですし、ワールド利用者から Pull Request を貰う形で運用しても良さそうです。
 
@@ -23,6 +23,8 @@ Unity を立ち上げずに内容編集できることを目指したワール�
 World Id はブラウザからワールドの Public Link を開くと、url 上で確認できます。
 
 例えば [https://vrchat.com/home/world/wrld_bf5bc59f-8daf-482f-bb95-cad5b465173a](https://vrchat.com/home/world/wrld_bf5bc59f-8daf-482f-bb95-cad5b465173a) の場合、 wrld_bf5bc59f-8daf-482f-bb95-cad5b465173a の部分が相当します。
+
+Avatar Id も指定可能です。 _但し、ペデスタル公開して問題ないか確認した上でご利用ください。利用規約に反するアバターを公開する目的での利用は禁止とします。_
 
 ### GitHub を使いたくない
 

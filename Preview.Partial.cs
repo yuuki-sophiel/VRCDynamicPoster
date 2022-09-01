@@ -5,8 +5,8 @@ using System.Collections.Generic;
 namespace VRCDynamicPoster;
 public partial class Preview
 {
-    public IEnumerable<WorldEntry> Entries { get; internal set; }
-    public Preview(IEnumerable<WorldEntry> entries)
+    public IEnumerable<Entry> Entries { get; internal set; }
+    public Preview(IEnumerable<Entry> entries)
     {
         Entries = entries;
     }
