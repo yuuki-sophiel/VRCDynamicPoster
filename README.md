@@ -47,3 +47,4 @@ $ docker-compose run generate_poster_video
   - 動的に生成した画像を、VRChat 上で表示する
 - ["【VRCAdvent Calendar】VRChat へ外部から文字列を渡すよ（C# only）" by 神城デジタル事務所](https://kamishiro.online/archives/215)
   - 動画として再生して、表示された画像を Texture2D に書き込み U#から取り扱う
+- test
